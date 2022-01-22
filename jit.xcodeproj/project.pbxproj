@@ -11,6 +11,7 @@
 		B6A850B2279B1ABA00A23811 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A850B1279B1ABA00A23811 /* ContentView.swift */; };
 		B6A850B4279B1ABA00A23811 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6A850B3279B1ABA00A23811 /* Assets.xcassets */; };
 		B6A850B7279B1ABA00A23811 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6A850B6279B1ABA00A23811 /* Preview Assets.xcassets */; };
+		B6A850C0279B1ACF00A23811 /* LLVM in Frameworks */ = {isa = PBXBuildFile; productRef = B6A850BF279B1ACF00A23811 /* LLVM */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6A850C0279B1ACF00A23811 /* LLVM in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +87,9 @@
 			dependencies = (
 			);
 			name = jit;
+			packageProductDependencies = (
+				B6A850BF279B1ACF00A23811 /* LLVM */,
+			);
 			productName = jit;
 			productReference = B6A850AC279B1ABA00A23811 /* jit.app */;
 			productType = "com.apple.product-type.application";
@@ -101,6 +106,7 @@
 				TargetAttributes = {
 					B6A850AB279B1ABA00A23811 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -113,6 +119,9 @@
 				Base,
 			);
 			mainGroup = B6A850A3279B1ABA00A23811;
+			packageReferences = (
+				B6A850BE279B1ACF00A23811 /* XCRemoteSwiftPackageReference "LLVMSwift" */,
+			);
 			productRefGroup = B6A850AD279B1ABA00A23811 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -267,6 +276,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = jit/jit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -285,6 +295,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.uicorn.jit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -294,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = jit/jit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -338,6 +350,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B6A850BE279B1ACF00A23811 /* XCRemoteSwiftPackageReference "LLVMSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/llvm-swift/LLVMSwift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B6A850BF279B1ACF00A23811 /* LLVM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6A850BE279B1ACF00A23811 /* XCRemoteSwiftPackageReference "LLVMSwift" */;
+			productName = LLVM;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B6A850A4279B1ABA00A23811 /* Project object */;
 }

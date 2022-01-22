@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "LLVM",
+        "repositoryURL": "https://github.com/llvm-swift/LLVMSwift",
+        "state": {
+          "branch": "master",
+          "revision": "c0a77afeab065d75ec851b8dc64538f4ef796f23",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
