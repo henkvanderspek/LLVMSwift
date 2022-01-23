@@ -12,14 +12,14 @@ public final class Parser {
     self.context = context
   }
   
-  public func parse(source: String, name: String) -> Module? {
+  public func parse(source: String, name: String) -> Bool {
     return source.utf8CString.withUnsafeBufferPointer { buffer in
       let buf = MemoryBuffer(buffer: buffer, name: UUID().uuidString).llvm
-      let mod = Module(name: name, context: context)
-      var module: LLVMModuleRef? = mod.llvm
+      //let mod = Module(name: name, context: context)
+      var module: LLVMModuleRef?
       var message: UnsafeMutablePointer<Int8>?
-      LLVMParseIRInContext(context.llvm, buf, &module, &message)
-      return mod
+      let ret = LLVMParseIRInContext(context.llvm, buf, &module, &message)
+      return ret == 1
     }
   }
 }
