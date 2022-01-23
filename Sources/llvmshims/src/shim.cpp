@@ -1,5 +1,6 @@
 #include "llvm-c/Core.h"
 #include "llvm-c/Object.h"
+#include "llvm-c/IRReader.h"
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/Analysis/GlobalsModRef.h"
 #include "llvm/IR/DebugInfo.h"
@@ -51,6 +52,8 @@ extern "C" {
 
   LLVMTailCallKind LLVMGetTailCallKind(LLVMValueRef CallInst);
   void LLVMSetTailCallKind(LLVMValueRef CallInst, LLVMTailCallKind TCK);
+
+  bool LLVMParse(const char *Source, size_t SourceLen, LLVMContextRef Context, LLVMModuleRef *Module);
 }
 
 using namespace llvm;
@@ -115,4 +118,15 @@ void LLVMSetTailCallKind(LLVMValueRef Call, LLVMTailCallKind TCK) {
   }
 
   unwrap<CallInst>(Call)->setTailCallKind(kind);
+}
+
+bool LLVMParse(const char *Source, size_t SourceLen, LLVMContextRef Context, LLVMModuleRef *Module) {
+  char *error = 0;
+  auto b = LLVMCreateMemoryBufferWithMemoryRange(Source, SourceLen, "", true);
+  //LLVMModuleRef module = 0;
+  auto r = LLVMParseIRInContext(Context, b, Module, &error);
+  if (error != 0) {
+    LLVMDisposeMessage(error);
+  }
+  return r == LLVMErrorSuccess;
 }

@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdbool.h>
 #include "llvm-c/Types.h"
 #include "llvm-c/Object.h"
 #include "llvm-c/DebugInfo.h"
@@ -32,5 +33,7 @@ typedef enum {
 
 LLVMTailCallKind LLVMGetTailCallKind(LLVMValueRef CallInst);
 void LLVMSetTailCallKind(LLVMValueRef CallInst, LLVMTailCallKind TCK);
+
+bool LLVMParse(const char *Source, size_t SourceLen, LLVMContextRef Context, LLVMModuleRef *Module);
 
 #endif /* LLVMSWIFT_LLVM_SHIM_H */

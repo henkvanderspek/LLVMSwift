@@ -9,17 +9,16 @@ public final class Parser {
   public let context: Context
   
   public init(context: Context = .global) {
+    initializeLLVM()
     self.context = context
   }
   
-  public func parse(source: String, name: String) -> Bool {
-    return source.utf8CString.withUnsafeBufferPointer { buffer in
-      let buf = MemoryBuffer(buffer: buffer, name: UUID().uuidString).llvm
-      //let mod = Module(name: name, context: context)
-      var module: LLVMModuleRef?
-      var message: UnsafeMutablePointer<Int8>?
-      let ret = LLVMParseIRInContext(context.llvm, buf, &module, &message)
-      return ret == 1
+  public func parse(source: String) -> Module? {
+    var module: LLVMModuleRef?
+    let success = source.utf8CString.withUnsafeBufferPointer { buffer in
+      return LLVMParse(source, source.count, context.llvm, &module)
     }
+    guard success, let m = module else { return nil }
+    return Module(llvm: m, context: context)
   }
 }

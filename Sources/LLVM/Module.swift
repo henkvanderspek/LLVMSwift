@@ -82,7 +82,15 @@ public final class Module: CustomStringConvertible {
 
   /// Returns the context associated with this module.
   public let context: Context
-
+    
+  /// Creates a `Module` with native types
+  ///
+  /// - parameter llvm: Reference to the module.
+  /// - parameter context: Reference to the context.
+  internal init(llvm: LLVMModuleRef, context: Context = .global) {
+    self.llvm = llvm
+    self.context = context
+  }
 
   /// Creates a `Module` with the given name.
   ///
