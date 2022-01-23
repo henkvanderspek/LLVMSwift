@@ -123,7 +123,6 @@ void LLVMSetTailCallKind(LLVMValueRef Call, LLVMTailCallKind TCK) {
 bool LLVMParse(const char *Source, size_t SourceLen, LLVMContextRef Context, LLVMModuleRef *Module) {
   char *error = 0;
   auto b = LLVMCreateMemoryBufferWithMemoryRange(Source, SourceLen, "", true);
-  //LLVMModuleRef module = 0;
   auto r = LLVMParseIRInContext(Context, b, Module, &error);
   if (error != 0) {
     LLVMDisposeMessage(error);
