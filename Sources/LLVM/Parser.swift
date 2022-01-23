@@ -12,8 +12,9 @@ public final class Parser {
     self.context = context
   }
   
-  public func parse(source: String, name: String) throws -> Module {
-    let buf = try MemoryBuffer(contentsOf: source).llvm
+  public func parse(source: String, name: String) -> Module {
+    let buffer = source.utf8CString.withUnsafeBufferPointer { $0 }
+    let buf = MemoryBuffer(buffer: buffer, name: UUID().uuidString).llvm
     let mod = Module(name: name, context: context)
     var module: LLVMModuleRef? = mod.llvm
     var message: UnsafeMutablePointer<Int8>?
